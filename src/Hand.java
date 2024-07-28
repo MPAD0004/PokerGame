@@ -16,9 +16,9 @@
 class Hand{
     private int HandRank;
     private int HighCardRank;
-    private GameEngine.Board board;
+    private Board board;
 
-    private Hand(GameEngine.Board currentBoard){
+    private Hand(Board currentBoard){
         board = currentBoard;
     }
     // update HandRank, HighCardRank based on current board
