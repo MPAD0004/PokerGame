@@ -19,10 +19,15 @@ import java.util.ArrayList;
  *
  * Attributes:
  *  players [ArrayList<Player>]: ArrayList containing all the players currently at the table
+ *  io [ioHandler]: stores ui communication medium
+ *  potValue [int]: current value of the pot
+ *  board [Board]: contains the game board
+ *  deck [Deck]: the deck object
  *
  * Methods:
  *  startGame(): make the game ready for the flop; set player chip counts
  *  setStartingChips(): set each player's chipCount to STARTING_CHIPS
+ *  playNextHand(): start the next hand of gameplay
  *
  * Constants:
  *  STARTING_CHIPS [double]: amount of chips players start with
@@ -30,12 +35,15 @@ import java.util.ArrayList;
 
 public class GameEngine {
     private static double STARTING_CHIPS = 200;
-
+    private ioHandler io;
     private ArrayList<Player> players;
+    private double potValue;
+    private Deck deck;
+    private Board board;
 
     private void startGame(){
         setStartingChips();
-
+        playNextHand();
     }
 
     private void setStartingChips(){
@@ -43,5 +51,23 @@ public class GameEngine {
         for (Player player : players) {
             player.setChipCount(STARTING_CHIPS);
         }
+    }
+
+    private void playNextHand(){
+        potValue = 0;
+
+        // Flop Time
+        board.dealFlop();
+        io.showState(potValue, board, players);
+
+    }
+
+    GameEngine(){
+        // Define variables
+        io = new ioHandler();
+        players = new ArrayList<>();
+        deck = new Deck();
+        board = new Board(deck);
+        startGame();
     }
 }
