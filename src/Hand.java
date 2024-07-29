@@ -4,23 +4,24 @@
  *  Board boardState: used to define the value of a hand in addition to the players hole cards
  *
  * Attributes:
- *  HandRank [int]: the numerical rank of a hand, with 0 being High Card (weakest hand) and 9 being royal flush (strongest hand)
- *  HighCardRank [int] : highest individual card, used to determine winner when HandRank of multiple hands is the same
- *  board [Board]: reference to the games Board variable
+ *  holeCard1 [Card]: holds the first hole card
+ *  holeCard2 [Card]: holds the second hole card
  *
  * Methods:
  *  Hand(): [constructor] attach the Board class to a variable for use in hand calculation
- *  setHandValue(): update the variables HandRank and HighCardRank based on the current Board object
- *  getHandName (): returns the string name of a hand for user to read, ie "7 high diamond flush"
+ *  setHoleCard1(): set holeCard1 value
+ *  setHoleCard2(): set holeCard2 value
+ *
  */
 class Hand{
-    private int HandRank;
-    private int HighCardRank;
-    private Board board;
+    private Card holeCard1;
+    private Card holeCard2;
 
-    private Hand(Board currentBoard){
-        board = currentBoard;
+
+    public Hand(){
     }
+
+
     // update HandRank, HighCardRank based on current board
     private String setHandValue(){
         return "";
@@ -31,5 +32,11 @@ class Hand{
         return "";
     }
 
+    public void setHoleCard1(Card holeCard1) {
+        this.holeCard1 = holeCard1;
+    }
 
+    public void setHoleCard2(Card holeCard2){
+        this.holeCard2 = holeCard2;
+    }
 }

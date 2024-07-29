@@ -21,6 +21,7 @@ class Card{
 
     public String getSuitSymbol(){
         //System.out.println(this.suit + this.rank);
+
         return switch (this.suit) {
             case "C" -> "♣";
             case "H" -> "♥";

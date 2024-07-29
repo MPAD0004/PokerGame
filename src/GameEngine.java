@@ -26,8 +26,9 @@ import java.util.ArrayList;
  *
  * Methods:
  *  startGame(): make the game ready for the flop; set player chip counts
- *  setStartingChips(): set each player's chipCount to STARTING_CHIPS
  *  playNextHand(): start the next hand of gameplay
+ *  dealHoleCard(): set each player's hand holeCard1 and holeCard2 attribute to nextCard() in deck
+ *  setStartingPlayers(): set the value of the players list, with names and chip values
  *
  * Constants:
  *  STARTING_CHIPS [double]: amount of chips players start with
@@ -35,6 +36,7 @@ import java.util.ArrayList;
 
 public class GameEngine {
     private static double STARTING_CHIPS = 200;
+    private static int NUM_PLAYERS = 4;
     private ioHandler io;
     private ArrayList<Player> players;
     private double potValue;
@@ -42,23 +44,36 @@ public class GameEngine {
     private Board board;
 
     private void startGame(){
-        setStartingChips();
+        setStartingPlayers();
         playNextHand();
     }
 
-    private void setStartingChips(){
-        // Set player starting chip counts
+
+    private void dealHoleCards(){
         for (Player player : players) {
-            player.setChipCount(STARTING_CHIPS);
+            player.hand.setHoleCard1(deck.getNextCard());
+            player.hand.setHoleCard2(deck.getNextCard());
+        }
+    }
+    private void setStartingPlayers(){
+        String[] names = {"Jack", "Jill", "John", "Jenny"}; // Players names used for testing
+
+        for (int i = 0; i < NUM_PLAYERS; i++) {
+            players.add(new Player(names[i], STARTING_CHIPS));
         }
     }
 
     private void playNextHand(){
         potValue = 0;
 
+        // Preflop betting
+        dealHoleCards();
+        io.showState(potValue, board, players);
         // Flop Time
         board.dealFlop();
         io.showState(potValue, board, players);
+
+        //
 
     }
 
@@ -68,6 +83,7 @@ public class GameEngine {
         players = new ArrayList<>();
         deck = new Deck();
         board = new Board(deck);
+        players = new ArrayList<>();
         startGame();
     }
 }

@@ -9,14 +9,29 @@
  *
  * Methods:
  *  setChipCount(double chipCount): set the players chipCount to the input chipCount
+ *  getPlayerName() -> String: return playerName
+ *  getPlayerChipCount() -> double: return players chipCount
  */
 class Player{
     private double chipCount;
     private String playerName;
-    private Hand hand;
+    public Hand hand;
 
     public void setChipCount(double chipCount){
         this.chipCount = chipCount;
     }
 
+    public String getPlayerName(){
+        return this.playerName;
+
+    }
+    public double getPlayerChipCount(){
+        return this.chipCount;
+    }
+
+    Player(String playerName, double chipCount){
+        this.playerName = playerName;
+        this.chipCount = chipCount;
+        hand = new Hand();
+    }
 }
