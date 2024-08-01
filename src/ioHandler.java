@@ -12,8 +12,10 @@ import java.util.ArrayList;
  * This decoupling of GameEngine from TextUI promotes modularity and flexibility and separation of concerns
  *
  * Methods:
- *  showState(): show the current game state; players, chipcounts, community cards, yourhand
+ *  showState(double potValue, Board board, ArrayList<Player> players, int youPlayerIndex): show the current game state; players, chipcounts, community cards, yourhand
  *  ioInit(): initialize the io device, by calling its constructor
+ *  getAction(): get the players action; check, call, raise, fold
+ *  reportAction(): print a string to screen
  */
 
 public class ioHandler {
@@ -27,7 +29,15 @@ public class ioHandler {
         io = new TextUI();
     }
 
-    public void showState(double potValue, Board board, ArrayList<Player> players){
-        io.showGameState(potValue, board, players);
+    public void showState(double potValue, Board board, ArrayList<Player> players, int youPlayerIndex, int dealerPlayerIndex){
+        io.showGameState(potValue, board, players, youPlayerIndex, dealerPlayerIndex);
+    }
+
+    public double getAction(){
+        return io.getBetAmount();
+    }
+
+    public void reportAction(String action){
+        System.out.println(action);
     }
 }

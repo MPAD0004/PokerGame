@@ -11,6 +11,8 @@
  *  Hand(): [constructor] attach the Board class to a variable for use in hand calculation
  *  setHoleCard1(): set holeCard1 value
  *  setHoleCard2(): set holeCard2 value
+ *  getHoleCard1() -> Card: return hole card1
+ *  getHoleCard2() -> Card: return hole card1
  *
  */
 class Hand{
@@ -38,5 +40,12 @@ class Hand{
 
     public void setHoleCard2(Card holeCard2){
         this.holeCard2 = holeCard2;
+    }
+
+    public Card getHoleCard1(){
+        return this.holeCard1;
+    }
+    public Card getHoleCard2(){
+        return this.holeCard2;
     }
 }
